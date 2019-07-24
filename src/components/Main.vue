@@ -1,12 +1,20 @@
 <template>
-    <h1>{{ msg }}</h1>
+    <div>
+        <Plot></Plot>
+    </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import Plot from './Plot.vue'
+import { backendService } from '../services'
 
-@Component
+
+@Component({
+    components: {
+        Plot,
+    },
+})
 export default class Main extends Vue {
-    private msg = 'Main Window Component'
 }
 </script>
 <style scoped>
