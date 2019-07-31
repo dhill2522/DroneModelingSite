@@ -56,14 +56,14 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { independentVariables, yVariables, batteryTypes } from '../data'
-import { independentVariable, yVariable } from '../models'
+import { independentVariable, yVariable, Params } from '../models'
 import { backendService } from '../services'
 
 @Component
 export default class SideBar extends Vue {
     private msg = 'Side Bar Component'
-    private droneName = ''
-    private batteryTechnology = ''
+    private droneName = 'dji-Mavic2'
+    private batteryTechnology = 'near-future'
     private batteryTechnologies = batteryTypes
     private stateOfHealth = 100.0
     private startStateOfCharge = 100.0
@@ -75,34 +75,40 @@ export default class SideBar extends Vue {
     private windDirection = 0.0
     private relativeHumidity = 0.0
     private timestep = 0
-    private xLabel = independentVariables[0]
-    private yLabel = yVariables[0]
+    private xLabel: independentVariable = independentVariables[0]
+    private yLabel: yVariable = yVariables[0]
     private title = ''
     private xArray = []
-    private weatherEffect = ''
+    private weatherEffect = 'temperature'
 
     private test(): void {
-        const data = {
-            droneName: this.droneName,
-            batteryTechnology: this.batteryTechnology,
-            stateOfHealth: this.stateOfHealth,
-            startStateOfCharge: this.startStateOfCharge,
+        const data: Params = {
+            validation: false,
+            validationcase: 'DiFranco2016',
+            dronename: this.droneName,
+            batterytechnology: this.batteryTechnology,
+            stateofhealth: this.stateOfHealth,
+            startstateofcharge: this.startStateOfCharge,
             altitude: this.altitude,
-            dropSize: this.dropSize,
-            liquidWaterContent: this.liquidWaterContent,
+            dropsize: this.dropSize,
+            liquidwatercontent: this.liquidWaterContent,
             temperature: this.temperature,
-            windSpeed: this.windSpeed,
-            windDirection: this.windDirection,
-            relativeHumidity: this.relativeHumidity,
+            windspeed: this.windSpeed,
+            winddirection: this.windDirection,
+            relativehumidity: this.relativeHumidity,
             timestep: this.timestep,
-            xLabel: this.xLabel,
-            yLabel: this.yLabel,
+            xlabel: this.xLabel,
+            ylabel: this.yLabel,
             title: this.title,
-            xArray: this.xArray,
-            weatherEffect: this.weatherEffect,
+            xarray: this.xArray,
+            weathereffect: this.weatherEffect,
         }
-        // Send the data to the API
-        console.log(data)
+        // console.log(data)
+        backendService.makeRequest(data)
+    }
+
+    private mounted(): void {
+        backendService.getValidationCases()
     }
 }
 </script>

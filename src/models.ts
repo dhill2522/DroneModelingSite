@@ -33,10 +33,16 @@ export interface Params {
     xlabel: independentVariable // From Dropdown
     ylabel: yVariable // From Dropdown
     title: string
-    simulationtype?: string  // From Dropdown
-    model?: string  // From Dropdown
     xarray: number[]
     weathereffect: string
+}
+
+export interface ValidationCase {
+    id: string
+    xvalid: number[]
+    yvalid: number[]
+    drone: object
+    settings: object
 }
 
 // export type response = {

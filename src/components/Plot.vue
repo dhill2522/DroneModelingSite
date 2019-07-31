@@ -11,7 +11,7 @@ import * as Plotly from 'plotly.js'
 export default class Plot extends Vue {
     private msg = 'Plot Component'
     private plotId = 'plot'
-    private plotData: Partial<Plotly.PlotData>[] = [
+    private plotData: Array<Partial<Plotly.PlotData>> = [
     ]
 
     private mounted(): void {

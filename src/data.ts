@@ -1,4 +1,6 @@
-export const independentVariables = [
+import { independentVariable, yVariable } from './models'
+
+export const independentVariables: independentVariable[] = [
     'startstateofcharge',
     'altitude',
     'temperature',
@@ -13,15 +15,11 @@ export const independentVariables = [
     'model',
 ]
 
-export const yVariables = ['range', 'power']
+export const yVariables: yVariable[] = ['range', 'power']
 
 export const batteryTypes = [
     {
         id: 1,
-        name: 'Type 1',
-    },
-    {
-        id: 2,
-        name: 'Type 2',
+        name: 'near-future',
     },
 ]
