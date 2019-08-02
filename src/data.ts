@@ -12,7 +12,6 @@ export const independentVariables: independentVariable[] = [
     'relativehumidity',
     'payload',
     'missionspeed',
-    'model',
 ]
 
 export const yVariables: yVariable[] = ['range', 'power']

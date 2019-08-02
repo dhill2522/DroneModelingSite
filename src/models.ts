@@ -10,8 +10,7 @@ export type independentVariable =
     'winddirection' |
     'relativehumidity' |
     'payload' |
-    'missionspeed' |
-    'model'
+    'missionspeed'
 
 export type yVariable = 'range' | 'power'
 
@@ -35,6 +34,7 @@ export interface Params {
     title: string
     xarray: number[]
     weathereffect: string
+    zParam: string
 }
 
 export interface ValidationCase {
@@ -45,7 +45,17 @@ export interface ValidationCase {
     settings: object
 }
 
-// export type response = {
-    // An array for each of the possible independentVariables and
-    // the yVariables
-// }
+export interface Plottable {
+    id: string
+    displayName: string
+    values: number[][]
+}
+
+export interface Response {
+    plottables: Plottable[]
+    zAxis: {
+        id: string,
+        displayName: string,
+        values: number[],
+    }
+}
