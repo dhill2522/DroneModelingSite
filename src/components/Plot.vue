@@ -56,6 +56,8 @@ export default class Plot extends Vue {
     private processSimulationResults(): void {
         this.dataLoaded = true
         const data: Response = backendService.simulationResults
+        this.yAxisOptions = []
+        this.xAxisOptions = []
         data.plottables.forEach((plottable) => {
             this.yAxisOptions.push(plottable)
             if (independentVariables.includes(plottable.id as IndependentVariable)) {

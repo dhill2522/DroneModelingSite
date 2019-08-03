@@ -44,10 +44,20 @@ class BackendService {
         }).then((resp) => {
             console.log('Response metadata', resp)
             resp.json().then((moreData: Response) => {
-                console.log('Response body', moreData)
-                this.simulationResults = moreData
-                this.eventEmitter.emit('simulateComplete')
+                if (moreData.error) {
+                    console.log('Error running simulation:', moreData.msg)
+                } else {
+                    console.log('Response body', moreData)
+                    this.simulationResults = moreData
+                    this.eventEmitter.emit('simulateComplete')
+                }
             })
+        }).catch((err: TypeError) => {
+            console.log('Error fetching simulation results', err)
+            console.log(err.message)
+            alert('Error fetching simulation results. If this problem persists, \
+            please report it as an issue on the github repository \
+            (https://github.com/dhill2522/DroneModelingSite).')
         })
     }
 
@@ -57,6 +67,13 @@ class BackendService {
                 .then((resp) => {
                     resp.json().then((data: ValidationCase[]) => {
                         console.log('Validation Cases', data)
+                        data.push({
+                            id: 'None',
+                            xvalid: [],
+                            yvalid: [],
+                            drone: {},
+                            settings: {}
+                        })
                         resolve(data)
                     })
                 })

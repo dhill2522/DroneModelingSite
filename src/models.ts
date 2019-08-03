@@ -89,6 +89,9 @@ export interface Plottable {
 }
 
 export interface Response {
+    error: boolean,
+    errorType: string | null,
+    msg: string,
     plottables: Plottable[]
     zAxis: {
         id: string,

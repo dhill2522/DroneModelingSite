@@ -17,7 +17,7 @@
             </div>
             <div class="form-row">
                 <label>Battery Technology</label>
-                <select id="">
+                <select v-model="params.batteryTechnology">
                     <option v-for="tech of batteryTechnologies" v-bind:key="tech.id">{{ tech.name }}</option>
                 </select>
             </div>
@@ -71,7 +71,7 @@ import { backendService } from '../services'
 export default class SideBar extends Vue {
     private params: Params = {
         droneName: 'dji-Mavic2',
-        batteryTechnology: 'near-future',
+        batteryTechnology: 'current',
         stateOfHealth: 100.0,
         altitude: 0.0,
         dropSize: 0.0,
@@ -87,7 +87,7 @@ export default class SideBar extends Vue {
         xVals: [0, 1],
         weatherEffect: 'temperature',
         validation: false,
-        validationCase: '',
+        validationCase: 'None',
         startStateOfCharge: 100.0,
         zParam: '',
     }

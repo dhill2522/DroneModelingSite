@@ -32,8 +32,7 @@ export const independentVariables: IndependentVariable[] = [
 export const yVariables: yVariable[] = ['range', 'power']
 
 export const batteryTypes = [
-    {
-        id: 1,
-        name: 'near-future',
-    },
+    { id: 1, name: 'current', displayName: 'Current' },
+    { id: 2, name: 'near-future', displayName: 'Near-future' },
+    { id: 3, name: 'far-future', displayName: 'Far-future' },
 ]
