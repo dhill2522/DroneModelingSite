@@ -1,14 +1,39 @@
-import { Params, ValidationCase } from './models'
+import { Params, ValidationCase, ApiParams, Response } from './models'
+import { EventEmitter } from 'events'
 
 class BackendService {
     public drones: any
+    public eventEmitter = new EventEmitter()
+    public simulationResults: any
     public validationCases: any
 
     private baseUrl = 'http://localhost:5000/'
     // private baseUrl = 'https://drones-and-weather.herokuapp.com/'
-    private response: any
 
-    public simulate(body: Params): void {
+    public simulate(data: Params): void {
+        const body: ApiParams = {
+            validation: data.validation,
+            validationcase: data.validationCase,
+            dronename: data.droneName,
+            batterytechnology: data.batteryTechnology,
+            stateofhealth: Number(data.stateOfHealth),
+            startstateofcharge: Number(data.startStateOfCharge),
+            altitude: Number(data.altitude),
+            dropsize: Number(data.dropSize),
+            liquidwatercontent: Number(data.liquidWaterContent),
+            temperature: Number(data.temperature),
+            windspeed: Number(data.windSpeed),
+            winddirection: Number(data.windDirection),
+            relativehumidity: Number(data.relativeHumidity),
+            timestep: Number(data.timestep),
+            xlabel: data.xLabel,
+            ylabel: data.yLabel,
+            title: data.title,
+            xvals: data.xVals,
+            weathereffect: data.weatherEffect,
+            zParam: data.zParam
+        }
+
         console.log('Request body', body)
         fetch(this.baseUrl + 'simulate', {
             method: 'POST',
@@ -16,11 +41,12 @@ class BackendService {
             headers: {
                 'Content-Type': 'appplication/json',
             },
-        }).then((data) => {
-            console.log('Response metadata', data)
-            data.json().then((moreData) => {
+        }).then((resp) => {
+            console.log('Response metadata', resp)
+            resp.json().then((moreData: Response) => {
                 console.log('Response body', moreData)
-                this.response = moreData
+                this.simulationResults = moreData
+                this.eventEmitter.emit('simulateComplete')
             })
         })
     }

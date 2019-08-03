@@ -1,17 +1,32 @@
-import { independentVariable, yVariable } from './models'
+import { IndependentVariable, yVariable } from './models'
 
-export const independentVariables: independentVariable[] = [
-    'startstateofcharge',
+export const independentVariables: IndependentVariable[] = [
     'altitude',
-    'temperature',
+    'batterycapacity',
+    'chord',
     'dropsize',
+    'endurancemaxhover',
+    'gustamplitude',
+    'gustfrequency',
+    'height',
+    'length',
     'liquidwatercontent',
-    'newtemperature',
-    'windspeed',
-    'winddirection',
-    'relativehumidity',
-    'payload',
+    'lifttodrag',
     'missionspeed',
+    'payload',
+    'rainfallrate',
+    'relativehumidity',
+    'rotordiameter',
+    'span',
+    'spanwiseefficiency',
+    'startstateofcharge',
+    'temperature',
+    'width',
+    'windheading',
+    'windspeed',
+    'windspeeddown',
+    'windspeednortheast',
+    'wingarea'
 ]
 
 export const yVariables: yVariable[] = ['range', 'power']

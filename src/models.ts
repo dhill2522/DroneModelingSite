@@ -1,24 +1,61 @@
-
-export type independentVariable =
-    'startstateofcharge' |
+export type IndependentVariable =
     'altitude' |
-    'temperature' |
+    'batterycapacity' |
+    'chord' |
     'dropsize' |
+    'endurancemaxhover' |
+    'gustamplitude' |
+    'gustfrequency' |
+    'height' |
+    'length' |
     'liquidwatercontent' |
-    'newtemperature' |
-    'windspeed' |
-    'winddirection' |
-    'relativehumidity' |
+    'lifttodrag' |
+    'missionspeed' |
     'payload' |
-    'missionspeed'
+    'rainfallrate' |
+    'relativehumidity' |
+    'rotordiameter' |
+    'span' |
+    'spanwiseefficiency' |
+    'startstateofcharge' |
+    'temperature' |
+    'width' |
+    'windheading' |
+    'windspeed' |
+    'windspeeddown' |
+    'windspeednortheast' |
+    'wingarea'
 
 export type yVariable = 'range' | 'power'
 
 export interface Params {
     validation: boolean
+    validationCase: string // from dropdown
+    droneName: string // from dropdown
+    batteryTechnology: string
+    stateOfHealth: number // use slider
+    startStateOfCharge: number // use slider
+    altitude: number
+    dropSize: number
+    liquidWaterContent: number // use slider
+    temperature: number
+    windSpeed: number // use slider
+    windDirection: number
+    relativeHumidity: number
+    timestep: number
+    xLabel: IndependentVariable // From Dropdown
+    yLabel: yVariable // From Dropdown
+    title: string
+    xVals: number[]
+    weatherEffect: IndependentVariable
+    zParam: string
+}
+
+export interface ApiParams {
+    validation: boolean
     validationcase: string // from dropdown
     dronename: string // from dropdown
-    batterytechnology: any
+    batterytechnology: string
     stateofhealth: number // use slider
     startstateofcharge: number // use slider
     altitude: number
@@ -29,11 +66,11 @@ export interface Params {
     winddirection: number
     relativehumidity: number
     timestep: number
-    xlabel: independentVariable // From Dropdown
+    xlabel: IndependentVariable // From Dropdown
     ylabel: yVariable // From Dropdown
     title: string
-    xarray: number[]
-    weathereffect: string
+    xvals: number[]
+    weathereffect: IndependentVariable
     zParam: string
 }
 
