@@ -19,9 +19,10 @@ import { independentVariables } from '../data'
 @Component
 export default class Plot extends Vue {
     private emptyPlottable = { id: '', values: [], displayName: ''}
-    private plotId = 'plot'
     private dataLoaded = false
+    private plotId = 'plot'
     private plotData: Array<Partial<Plotly.PlotData>> = []
+    private layout: Partial<Plotly.Layout> = {}
     private xAxisOptions: Plottable[] = []
     private xAxisLabel = ''
     private xAxis: Plottable = this.emptyPlottable
@@ -29,6 +30,11 @@ export default class Plot extends Vue {
 
     private mounted(): void {
         Plotly.newPlot(this.plotId, this.plotData)
+            .then((plotElement) => {
+                window.addEventListener('resize', () => {
+                    Plotly.Plots.resize(this.plotId)
+                })
+            })
         backendService.eventEmitter.on('simulateComplete', () => {
             this.processSimulationResults()
         })
@@ -47,10 +53,7 @@ export default class Plot extends Vue {
                 visible: 'legendonly'
             })
         })
-        const layout: Partial<Plotly.Layout> = {
-            title: 'Ryan is Awesome!',
-        }
-        Plotly.newPlot(this.plotId, this.plotData, layout)
+        Plotly.newPlot(this.plotId, this.plotData, this.layout)
     }
 
     private processSimulationResults(): void {
@@ -60,12 +63,17 @@ export default class Plot extends Vue {
         this.xAxisOptions = []
         data.plottables.forEach((plottable) => {
             this.yAxisOptions.push(plottable)
-            if (independentVariables.includes(plottable.id as IndependentVariable)) {
+            if (independentVariables.find( el => el.name === plottable.id as IndependentVariable)) {
                 this.xAxisOptions.push(plottable)
             }
         })
         if (this.xAxisOptions) { this.xAxis = this.xAxisOptions[0] }
         this.xAxisLabel = this.xAxis.displayName
+
+        this.layout = {
+            title: 'Ryan is Awesome!'
+        }
+
         this.updatePlot()
     }
 }

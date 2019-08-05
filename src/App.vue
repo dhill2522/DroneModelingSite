@@ -22,6 +22,7 @@ export default class App extends Vue {}
 </script>
 
 <style>
+
 html {
   height: 100%;
 }
@@ -58,6 +59,7 @@ body {
   border: seagreen solid;
   border-radius: 10px;
   padding: 10px;
+  margin: 8px;
 }
 
 .main {

@@ -74,12 +74,26 @@ export interface ApiParams {
     zParam: string
 }
 
+export interface ValidationCaseSettings {
+    stateofhealth: number
+    startstateofcharge: number
+    altitude: number
+    dropsize: number
+    liquidwatercontent: number
+    temperature: number
+    windspeed: number
+    winddirection: number
+    relativehumidity: number
+    xlabel: IndependentVariable
+    batterytechnology: string
+}
+
 export interface ValidationCase {
     id: string
     xvalid: number[]
     yvalid: number[]
     drone: object
-    settings: object
+    settings: ValidationCaseSettings
 }
 
 export interface Plottable {
@@ -91,7 +105,7 @@ export interface Plottable {
 export interface Response {
     error: boolean,
     errorType: string | null,
-    msg: string,
+    log: string,
     plottables: Plottable[]
     zAxis: {
         id: string,
@@ -99,3 +113,8 @@ export interface Response {
         values: number[],
     }
 }
+
+export interface Drone {
+    'Drone Name': string
+    'Battery Type'?: string
+} 

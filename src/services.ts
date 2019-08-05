@@ -1,13 +1,14 @@
-import { Params, ValidationCase, ApiParams, Response } from './models'
+import { Params, ValidationCase, ApiParams, Response, Drone } from './models'
 import { EventEmitter } from 'events'
 
 class BackendService {
-    public drones: any
     public eventEmitter = new EventEmitter()
     public simulationResults: any
     public validationCases: any
-
+    
     private baseUrl = 'http://localhost:5000/'
+    private drones: Drone[] = []
+    private selectedDrone: Drone = {'Drone Name': ''}
     // private baseUrl = 'https://drones-and-weather.herokuapp.com/'
 
     public simulate(data: Params): void {
@@ -45,7 +46,7 @@ class BackendService {
             console.log('Response metadata', resp)
             resp.json().then((moreData: Response) => {
                 if (moreData.error) {
-                    console.log('Error running simulation:', moreData.msg)
+                    console.log('Error running simulation:', moreData.log)
                 } else {
                     console.log('Response body', moreData)
                     this.simulationResults = moreData
@@ -86,10 +87,25 @@ class BackendService {
                 .then((resp) => {
                     resp.json().then((data) => {
                         console.log('Drones', data)
+                        this.drones = data
                         resolve(data)
                     })
                 })
         })
+    }
+
+    public getSelectedDrone(): any {
+        return this.selectedDrone
+    }
+
+    public setSelectedDrone(droneName: string): void {
+        const drone = this.drones.find((d) => d['Drone Name'] === droneName )
+        if (drone) {
+            this.selectedDrone = drone
+        } else {
+            this.selectedDrone = {'Drone Name': 'No Drone Selected'}
+        }
+        this.eventEmitter.emit('drone', this.selectedDrone)
     }
 }
 

@@ -18,6 +18,8 @@
     "semicolon": [true, "never"],
     "no-console": [false],
     "no-trailing-whitespace": false,
-    "trailing-comma": [false, {}]
+    "trailing-comma": [false, {}],
+    "array-type": [false, "array"],
+    "arrow-parens": [false]
   }
 }
