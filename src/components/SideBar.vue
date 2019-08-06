@@ -1,8 +1,10 @@
 <template>
-    <div>
-        <h2>Drone Modeling</h2>
-        <hr>
-        <div class="form-holder">
+    <div class="sideToolBar">
+        <div class="static">
+            <h2>Drone Modeling</h2>
+            <hr style="margin: unset; padding-top: 1 rem;">
+        </div>
+        <div class="form-holder dynamic">
             <div class="form-row">
                 <label>Drone Name</label>
                 <select 
@@ -76,7 +78,10 @@
                 </select>
             </div>
         </div>
-        <button @click="simulate()">Simulate</button>
+        <div class="static">
+            <hr style="margin: unset; padding-bottom: 1 rem;">
+            <button @click="simulate()">Simulate</button>
+        </div>
     </div>
 </template>
 <script lang="ts">
@@ -102,7 +107,7 @@ export default class SideBar extends Vue {
         xLabel: independentVariables[0].name,
         yLabel: yVariables[0],
         title: '',
-        xVals: [0, 1],
+        xVals: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         weatherEffect: 'temperature',
         validation: false,
         validationCase: 'None',
@@ -165,6 +170,24 @@ export default class SideBar extends Vue {
 .form-row {
     flex-direction: row;
     margin-bottom: 10px;
+}
+
+.sideToolBar {
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+}
+
+.static {
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 58px;
+}
+
+.dynamic {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow-y: auto;
 }
 
 </style>

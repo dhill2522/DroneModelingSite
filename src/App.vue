@@ -31,7 +31,6 @@ body {
   min-height: 100%;
 }
 
-
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -49,7 +48,10 @@ body {
   left: 0px;
   flex: 1;
   display: flex;
-  flex-direction: row
+  flex-direction: row;
+  height: 98vh;
+  min-height: 98vh;
+  max-height: 98vh;
 }
 
 .side-bar {
