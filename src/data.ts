@@ -1,32 +1,37 @@
 import { IndependentVariable, yVariable } from './models'
 
 export const independentVariables: { name: IndependentVariable, display: string }[] = [
-    { name: 'altitude', display: 'Altitude'},
-    { name: 'batterycapacity', display: 'Battery Capacity'},
-    { name: 'chord', display: 'Chord'},
-    { name: 'dropsize', display: 'Drop Size'},
-    { name: 'endurancemaxhover', display: 'Max Hover Endurance'},
-    { name: 'gustamplitude', display: 'Gust Amplitude'},
-    { name: 'gustfrequency', display: 'Gust Frequency'},
-    { name: 'height', display: 'Height'},
-    { name: 'length', display: 'Length'},
-    { name: 'liquidwatercontent', display: 'Liquid Water Content'},
-    { name: 'lifttodrag', display: 'Lift to Drag'},
-    { name: 'missionspeed', display: 'Mission Speed'},
-    { name: 'payload', display: 'Payload'},
-    { name: 'rainfallrate', display: 'Rainfall Rate'},
-    { name: 'relativehumidity', display: 'Relative Humidity'},
-    { name: 'rotordiameter', display: 'Rotor Diameter'},
-    { name: 'span', display: 'Span'},
-    { name: 'spanwiseefficiency', display: 'Spanwise Efficiency'},
-    { name: 'startstateofcharge', display: 'Start State of Charge'},
-    { name: 'temperature', display: 'Temperature'},
-    { name: 'width', display: 'Width'},
-    { name: 'windheading', display: 'Wind Heading'},
-    { name: 'windspeed', display: 'Wind Speed'},
-    { name: 'windspeeddown', display: 'Downdraft'},
-    { name: 'wingarea', display: 'Wing Area'}
-]
+    { name: 'altitude' as IndependentVariable, display: 'Altitude' },
+    { name: 'batterycapacity' as IndependentVariable, display: 'Battery Capacity' },
+    { name: 'chord' as IndependentVariable, display: 'Chord' },
+    { name: 'dropsize' as IndependentVariable, display: 'Drop Size' },
+    { name: 'endurancemaxhover' as IndependentVariable, display: 'Max Hover Endurance' },
+    { name: 'gustamplitude' as IndependentVariable, display: 'Gust Amplitude' },
+    { name: 'gustfrequency' as IndependentVariable, display: 'Gust Frequency' },
+    { name: 'height' as IndependentVariable, display: 'Height' },
+    { name: 'length' as IndependentVariable, display: 'Length' },
+    { name: 'liquidwatercontent' as IndependentVariable, display: 'Liquid Water Content' },
+    { name: 'lifttodrag' as IndependentVariable, display: 'Lift to Drag' },
+    { name: 'missionspeed' as IndependentVariable, display: 'Mission Speed' },
+    { name: 'payload' as IndependentVariable, display: 'Payload' },
+    { name: 'rainfallrate' as IndependentVariable, display: 'Rainfall Rate' },
+    { name: 'relativehumidity' as IndependentVariable, display: 'Relative Humidity' },
+    { name: 'rotordiameter' as IndependentVariable, display: 'Rotor Diameter' },
+    { name: 'span' as IndependentVariable, display: 'Span' },
+    { name: 'spanwiseefficiency' as IndependentVariable, display: 'Spanwise Efficiency' },
+    { name: 'startstateofcharge' as IndependentVariable, display: 'Start State of Charge' },
+    { name: 'temperature' as IndependentVariable, display: 'Temperature' },
+    { name: 'width' as IndependentVariable, display: 'Width' },
+    { name: 'windheading' as IndependentVariable, display: 'Wind Heading' },
+    { name: 'windspeed' as IndependentVariable, display: 'Wind Speed' },
+    { name: 'windspeeddown' as IndependentVariable, display: 'Downdraft' },
+    { name: 'wingarea' as IndependentVariable, display: 'Wing Area' }
+].sort((a, b) => {
+    if (a.display > b.display) {
+        return 1
+    }
+    return 0
+})
 
 export const yVariables: yVariable[] = ['range', 'power']
 

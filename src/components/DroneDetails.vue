@@ -26,7 +26,7 @@ import { backendService } from '../services'
     components: {},
 })
 export default class DroneDetails extends Vue {
-    private drone: Drone = { 'Drone Name': 'Please select a drone'}
+    private drone: any = { 'Drone Name': 'Please select a drone'}
     private droneProps: {prop: string, value: any}[] = []
 
     private mounted() {

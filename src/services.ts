@@ -73,7 +73,19 @@ class BackendService {
                             xvalid: [],
                             yvalid: [],
                             drone: {},
-                            settings: {}
+                            settings: {
+                                stateofhealth: 100,
+                                startstateofcharge: 100,
+                                altitude: 0,
+                                dropsize: 0,
+                                liquidwatercontent: 0,
+                                temperature: 25,
+                                windspeed: 0,
+                                winddirection: 0,
+                                relativehumidity: 0,
+                                xlabel: 'temperature',
+                                batterytechnology: 'current'
+                            }
                         })
                         resolve(data)
                     })

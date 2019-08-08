@@ -73,8 +73,14 @@
             </div>
             <div class="form-row">
                 <label>Manipulated Variable</label>
-                <select v-model="params.xLabel" :disabled="params.validation">
-                    <option v-for="variable of independentVariables" v-bind:key="variable.name">{{ variable.display }}</option>
+                <select 
+                    v-model="params.xLabel" 
+                    :disabled="params.validation"
+                    @change="updateXLabel($event)">
+                    <option 
+                        v-for="variable of independentVariables" 
+                        :key="variable.name"
+                        :value="variable.name">{{ variable.display }}</option>
                 </select>
             </div>
         </div>
@@ -87,7 +93,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { independentVariables, yVariables, batteryTypes } from '../data'
-import { yVariable, Params, ValidationCase } from '../models'
+import { yVariable, Params, ValidationCase, IndependentVariable } from '../models'
 import { backendService } from '../services'
 
 @Component
@@ -107,7 +113,7 @@ export default class SideBar extends Vue {
         xLabel: independentVariables[0].name,
         yLabel: yVariables[0],
         title: '',
-        xVals: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        xVals: [0, 1, 2, 3, 4, 5],
         weatherEffect: 'temperature',
         validation: false,
         validationCase: 'None',
@@ -135,6 +141,11 @@ export default class SideBar extends Vue {
 
     private updateDrone(droneName: string): void {
         backendService.setSelectedDrone(droneName)
+    }
+
+    private updateXLabel(event: any): void {
+        console.log('updated xLabel', event)
+        this.params.xLabel = event.target.value as IndependentVariable
     }
 
     private setValidation(vcase: string): void {
@@ -190,5 +201,8 @@ export default class SideBar extends Vue {
     overflow-y: auto;
 }
 
-</style>
+div.form-row > label {
+    margin-right: 8px;
+}
 
+</style>
