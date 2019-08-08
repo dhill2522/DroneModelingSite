@@ -4,6 +4,7 @@ import { EventEmitter } from 'events'
 class BackendService {
     public eventEmitter = new EventEmitter()
     public simulationResults: any
+    public simulationLog: any
     public validationCases: any
     
     private baseUrl = 'http://localhost:5000/'
@@ -50,6 +51,7 @@ class BackendService {
                 } else {
                     console.log('Response body', moreData)
                     this.simulationResults = moreData
+                    this.simulationLog = moreData.log
                     this.eventEmitter.emit('simulateComplete')
                 }
             })
