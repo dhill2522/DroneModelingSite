@@ -6,6 +6,12 @@
         </div>
         <div class="form-holder dynamic">
             <div class="form-row">
+                <label>Validation Case</label>
+                <select v-model="params.validationCase" @change="setValidation($event.target.value)">
+                    <option v-for="v of validationCases" v-bind:key="v.id">{{ v.id }}</option>
+                </select>
+            </div>
+            <div class="form-row">
                 <label>Drone Name</label>
                 <select 
                     v-model="params.droneName" 
@@ -15,12 +21,16 @@
                     <option v-for="drone of drones" v-bind:key="drone['Drone Name']">{{ drone['Drone Name'] }}</option>
                 </select>
             </div>
-            <div class="form-row">
-                <label>Validation Case</label>
-                <select v-model="params.validationCase" @change="setValidation($event.target.value)">
-                    <option v-for="v of validationCases" v-bind:key="v.id">{{ v.id }}</option>
+            <!-- <div class="form-row" v-if="selectedDrone['Wing Type'] === 'fixed'">
+                <label>Param1</label>
+                <select>
+                    <option></option>
                 </select>
-            </div>
+                <label>Param2</label>
+                <select>
+                    <option></option>
+                </select>
+            </div> -->
             <div class="form-row">
                 <label>Battery Technology</label>
                 <select v-model="params.batteryTechnology" :disabled="params.validation">
@@ -72,7 +82,7 @@
                     v-model="params.relativeHumidity" :disabled="params.validation">
             </div>
             <div class="form-row">
-                <label>Manipulated Variable</label>
+                <label>Manipulated Variable (MV)</label>
                 <select 
                     v-model="params.xLabel" 
                     :disabled="params.validation"
@@ -82,6 +92,18 @@
                         :key="variable.name"
                         :value="variable.name">{{ variable.display }}</option>
                 </select>
+            </div>
+            <div class="form-row" @change="generateXArray()">
+                <label>MV Initial Value</label>
+                <input type="number" :max="this.xEnd" v-model="xBegin" :disabled="params.validation">
+            </div>
+            <div class="form-row" @change="generateXArray()">
+                <label>MV Final Value</label>
+                <input type="number" :min="this.xBegin" v-model="xEnd" :disabled="params.validation">
+            </div>
+            <div class="form-row" @change="generateXArray()">
+                <label>MV Number of Values</label>
+                <input type="number" min="1" max="100" v-model="xCount" :disabled="params.validation">
             </div>
         </div>
         <div class="static">
@@ -93,7 +115,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { independentVariables, yVariables, batteryTypes } from '../data'
-import { yVariable, Params, ValidationCase, IndependentVariable } from '../models'
+import { yVariable, Params, ValidationCase, IndependentVariable, Drone } from '../models'
 import { backendService } from '../services'
 
 @Component
@@ -123,9 +145,14 @@ export default class SideBar extends Vue {
     private batteryTechnologies = batteryTypes
     private drones: any[] = []
     private independentVariables = independentVariables
+    private selectedDrone: Drone = this.drones[0]
+    private xBegin = 0
+    private xEnd = 5
+    private xCount = 6
     private validationCases: ValidationCase[] = []
 
     private simulate(): void {
+        backendService.selectedXLabel = this.params.xLabel
         backendService.simulate(this.params)
     }
 
@@ -139,8 +166,22 @@ export default class SideBar extends Vue {
         })
     }
 
+    private generateXArray(): void {
+        const xArray = []
+        const increment = (Number(this.xEnd) - Number(this.xBegin)) / (Number(this.xCount) - 1)
+        for (let i = 0; i < Number(this.xCount); i++) {
+            xArray.push(Number(this.xBegin) + increment * i)            
+        }
+        this.params.xVals = xArray
+        console.log(this.xBegin, this.xEnd, this.xCount, this.params.xVals)
+    }
+
     private updateDrone(droneName: string): void {
         backendService.setSelectedDrone(droneName)
+        const d = this.drones.find((el) => el['Drone Name'] === droneName)
+        if (d) {
+            this.selectedDrone = d
+        }
     }
 
     private updateXLabel(event: any): void {
@@ -153,6 +194,7 @@ export default class SideBar extends Vue {
         if (vcase === 'None') {
             this.params.validation = false
             this.params.droneName = 'dji-Mavic2'
+            backendService.setSelectedDrone(this.params.droneName)
         } else if (validationCase) {
             this.params.validation = true
             this.params.droneName = 'From Validation Data'
@@ -167,6 +209,7 @@ export default class SideBar extends Vue {
             this.params.windDirection = validationCase.settings.winddirection
             this.params.relativeHumidity = validationCase.settings.relativehumidity
             this.params.xLabel = validationCase.settings.xlabel
+            backendService.setSelectedDrone('none')
         } else {
             this.params.validation = false
         }

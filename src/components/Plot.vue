@@ -3,7 +3,7 @@
         <div id="plot"></div>
         <div v-if="dataLoaded">
             <select v-model="xAxisLabel" @change="updatePlot()">
-                <option v-for="opt of xAxisOptions" v-bind:key="opt.id">{{ opt.displayName }}</option>
+                <option v-for="opt of xAxisOptions" :value="opt.id" v-bind:key="opt.id">{{ opt.displayName }}</option>
             </select>
 
         </div>
@@ -43,6 +43,8 @@ export default class Plot extends Vue {
     private updatePlot(): void {
         const xOption = this.xAxisOptions.find((el) => el.displayName === this.xAxisLabel)
         this.xAxis = xOption ? xOption : this.emptyPlottable
+        console.log(this.xAxis)
+        this.plotData = []
         this.yAxisOptions.forEach((opt) => {
             this.plotData.push({
                 x: this.xAxis.values[0],
@@ -62,13 +64,22 @@ export default class Plot extends Vue {
         this.yAxisOptions = []
         this.xAxisOptions = []
         data.plottables.forEach((plottable) => {
-            this.yAxisOptions.push(plottable)
-            if (independentVariables.find( el => el.name === plottable.id as IndependentVariable)) {
-                this.xAxisOptions.push(plottable)
-            }
+            if (plottable.values[0][0] !== null) {
+                this.yAxisOptions.push(plottable)
+                if (independentVariables.find( el => el.name === plottable.id as IndependentVariable)) {
+                    this.xAxisOptions.push(plottable)
+                }
+            } else { console.log('Null values:', plottable)}
         })
-        if (this.xAxisOptions) { this.xAxis = this.xAxisOptions[0] }
-        this.xAxisLabel = this.xAxis.displayName
+        console.log('backendService.selectedXLabel', backendService.selectedXLabel)
+        if (backendService.selectedXLabel) {
+            this.xAxisLabel = backendService.selectedXLabel
+            // const selectedX = this.xAxisOptions.find(el => el.id === backendService.selectedXLabel)
+            // console.log('selectedX', selectedX) 
+            // if (selectedX) { this.xAxis = selectedX } else { this.xAxis = this.xAxisOptions[0]}
+            // this.xAxis = this.xAxisOptions[0] 
+        }
+        // this.xAxisLabel = this.xAxis.displayName
 
         this.layout = {
             title: 'Ryan is Awesome!'
