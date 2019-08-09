@@ -1,4 +1,5 @@
-# gui
+# Drone Modeling Site
+> This project, together with the [backend API](https://github.com/dhill2522/DroneWeatherApi), functions as a graphical frontend to [Drone Application in Weather Environments](https://github.com/rymanderson/drone_awe). Is/will be hosted at droneecon.com
 
 ## Project setup
 ```
@@ -24,6 +25,3 @@ npm run test
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

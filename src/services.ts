@@ -7,8 +7,8 @@ class BackendService {
     public simulationResults: any
     public validationCases: any
     
-    private baseUrl = 'http://localhost:5000/'
-    // private baseUrl = 'https://drones-and-weather.herokuapp.com/'
+    // private baseUrl = 'http://localhost:5000/'
+    private baseUrl = 'https://drones-and-weather.herokuapp.com/'
     private drones: Drone[] = []
     private errMsg = 'Error running simulation. A parameter may be invalid or the solver may not have converged, so try adjusting the simulation parameters. If this problem persists, please report it as an issue on the github repository (https://github.com/dhill2522/DroneModelingSite).'
     private selectedDrone: Drone = {'Drone Name': ''}

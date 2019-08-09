@@ -10,16 +10,16 @@
                     <li v-bind:class="{ 'is-active': currentTab === 'drone'}">
                         <a @click="currentTab = 'drone'">Drone Details</a>
                     </li>
-                    <li v-bind:class="{ 'is-active': currentTab === 'log'}">
+                    <!-- <li v-bind:class="{ 'is-active': currentTab === 'log'}">
                         <a @click="currentTab = 'log'">Simulation Log</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
         <div class="scrollBox">
             <div v-if="currentTab==='docs'"><HelpDocs></HelpDocs></div>
             <div v-if="currentTab==='drone'"><DroneDetails></DroneDetails></div>
-            <div v-if="currentTab==='log'"><SimLog></SimLog></div>
+            <!-- <div v-if="currentTab==='log'"><SimLog></SimLog></div> -->
         </div>
     </div>
 </template>
