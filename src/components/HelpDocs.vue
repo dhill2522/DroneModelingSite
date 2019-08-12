@@ -1,13 +1,13 @@
 <template>
     <div>
         <h1 class="subtitle">
-            drone_awe - Drones Applications in Weather Environments
+            <i>Drone-AWE</i> - Drones Applications in Weather Environments
         </h1>
 
 
         <div style="text-align:left;">
             <p>
-                The purpose of the Drone Applications in Weather Environments (Drone-AWE) project is to predict drone performance under a wide range of weather conditions with mission planning and battery behavior in mind. Drone-AWE is powered by an interactive python library located at <a href="https://github.com/rymanderson/drone_awe">GitHub</a>. For an explanation of the theory to develop Drone-AWE, or if you would like to use the Drone-AWE library natively, visit <a href="https://rymanderson.github.io/site/">the documentation pages</a>. 
+                The purpose of the Drone Applications in Weather Environments (Drone-AWE) project is to predict drone performance under a wide range of weather conditions with mission planning and battery behavior in mind. Drone-AWE is powered by an interactive python library located at <a href="https://github.com/rymanderson/drone_awe">GitHub</a>. For an explanation of the theory and physics used to develop Drone-AWE, or if you would like to use the Drone-AWE library as a Python package, visit <a href="https://rymanderson.github.io/site/">the docs</a>. 
             </p>
             <p style="margin-top: 10px; margin-bottom: 10px;">
                 Below is a list of input parameters for drone simulations accompanied by a brief description.

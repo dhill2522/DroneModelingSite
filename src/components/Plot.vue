@@ -82,7 +82,7 @@ export default class Plot extends Vue {
         // this.xAxisLabel = this.xAxis.displayName
 
         this.layout = {
-            title: 'Ryan is Awesome!'
+            title: 'Simulation Results'
         }
 
         this.updatePlot()
